@@ -2,7 +2,7 @@ import React from "react";
 
 const RecipeLists = () => {
   return (
-    <main className="w-full max-w-[1200px] mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-6">
+    <main className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {/* サンプルデータ（動的に変更予定） */}
       {[...Array(6)].map((_, i) => (
         <div key={i} className="bg-gray-800 p-4 rounded-lg shadow-lg">

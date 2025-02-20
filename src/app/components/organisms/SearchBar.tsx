@@ -2,7 +2,7 @@ import React from "react";
 
 const SearchBar = () => {
   return (
-    <div className="w-full max-w-[1200px] mt-8 px-6">
+    <div className="w-full">
       <input
         type="text"
         placeholder="レシピを検索..."

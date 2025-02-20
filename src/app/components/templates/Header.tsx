@@ -4,7 +4,7 @@ import React, { useState } from "react";
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   return (
-    <header className="w-[calc(100%_-_48px)] max-w-[1200px] flex justify-between items-center px-6 py-4 bg-gray-800 rounded-lg relative">
+    <header className="w-full flex justify-between items-center px-6 py-4 bg-gray-800 rounded-lg relative">
       <h1 className="text-3xl font-bold text-yellow-400">🍳 Recipe Hub</h1>
       <nav className="hidden md:flex gap-6">
         <ul className="flex gap-6">
