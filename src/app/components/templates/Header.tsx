@@ -1,6 +1,5 @@
 "use client";
 import { useUser } from "@/app/hooks/useUser";
-import { supabase } from "@/app/utils/supabaseClient";
 import React from "react";
 
 const Header = () => {

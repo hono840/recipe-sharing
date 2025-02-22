@@ -1,44 +1,44 @@
 "use client";
 import { useState } from "react";
-import { supabase } from "../utils/supabaseClient";
+import { useRouter } from "next/navigation";
+import { supabase } from "@/app/utils/supabaseClient";
 
-const Signup = () => {
+const Login = () => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [formData, setFormData] = useState({
-    username: "",
     email: "",
     password: "",
   });
+  const router = useRouter();
 
   const onChangeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const signup = async (e: React.FormEvent) => {
+  const login = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setSuccess(false);
     try {
-      const { error } = await supabase.auth.signUp({
+      const { error } = await supabase.auth.signInWithPassword({
         email: formData.email,
         password: formData.password,
-        options: {
-          data: {
-            username: formData.username,
-          },
-        },
       });
       if (error) console.error(error);
     } catch {
-      console.error("サインアップに失敗しました");
+      console.error("ログインに失敗しました");
     }
 
     setTimeout(() => {
       setLoading(false);
       setSuccess(true);
-      setFormData({ username: "", email: "", password: "" });
-      setTimeout(() => setSuccess(false), 3000);
+      setFormData({ email: "", password: "" });
+
+      setTimeout(() => {
+        router.push("/mypage");
+        setSuccess(false), 3000;
+      });
     }, 2000);
   };
 
@@ -48,34 +48,20 @@ const Signup = () => {
         {/* ローディングオーバーレイ */}
         {loading && (
           <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white text-lg font-semibold">
-            登録中...
+            ログイン中...
           </div>
         )}
 
         {/* トースト通知 */}
         {success && (
           <div className="absolute top-4 right-4 bg-green-600 text-white px-4 py-2 rounded shadow-lg animate-fade-in">
-            サインアップ成功！
+            ログイン成功！
           </div>
         )}
 
-        <h2 className="text-2xl font-semibold text-center mb-4">
-          サインアップ
-        </h2>
+        <h2 className="text-2xl font-semibold text-center mb-4">ログイン</h2>
 
-        <form onSubmit={signup} className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium mb-1">ユーザー名</label>
-            <input
-              type="text"
-              name="username"
-              value={formData.username}
-              onChange={onChangeValue}
-              required
-              className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-
+        <form onSubmit={login} className="space-y-4">
           <div>
             <label className="block text-sm font-medium mb-1">
               メールアドレス
@@ -107,15 +93,15 @@ const Signup = () => {
             disabled={loading}
             className="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py-2 px-4 rounded transition disabled:opacity-50"
           >
-            登録
+            ログイン
           </button>
         </form>
 
-        {/* 👇 すでにアカウントを持っている人向けの案内 */}
+        {/* 👇 アカウントを持っていない人向けの案内 */}
         <p className="mt-4 text-xs text-gray-400 text-center">
-          すでにアカウントをお持ちの方は{" "}
-          <a href="/login" className="text-blue-400 hover:underline">
-            こちらからログイン
+          アカウントをお持ちでない方は{" "}
+          <a href="/signup" className="text-blue-400 hover:underline">
+            こちらからサインアップ
           </a>
         </p>
       </div>
@@ -123,4 +109,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default Login;

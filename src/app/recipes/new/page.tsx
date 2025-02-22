@@ -7,7 +7,7 @@ import { useUser } from "@/app/hooks/useUser";
 import React from "react";
 
 const RecipesNew = () => {
-  const { user, isLoggedin } = useUser();
+  const { isLoggedin } = useUser();
   return (
     <PageWrapper>
       <PageContentsWrapper>
