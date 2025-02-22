@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { supabase } from "../utils/supabaseClient";
+import { useRouter } from "next/navigation";
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
@@ -9,6 +10,7 @@ const Login = () => {
     email: "",
     password: "",
   });
+  const router = useRouter();
 
   const onChangeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -32,7 +34,11 @@ const Login = () => {
       setLoading(false);
       setSuccess(true);
       setFormData({ email: "", password: "" });
-      setTimeout(() => setSuccess(false), 3000);
+
+      setTimeout(() => {
+        router.push("/mypage");
+        setSuccess(false), 3000;
+      });
     }, 2000);
   };
 

@@ -23,6 +23,11 @@ const Signup = () => {
       const { error } = await supabase.auth.signUp({
         email: formData.email,
         password: formData.password,
+        options: {
+          data: {
+            username: formData.username,
+          },
+        },
       });
       if (error) console.error(error);
     } catch {
