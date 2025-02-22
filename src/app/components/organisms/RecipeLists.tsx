@@ -7,7 +7,7 @@ const RecipeLists = () => {
       {[...Array(6)].map((_, i) => (
         <div key={i} className="bg-gray-800 p-4 rounded-lg shadow-lg">
           <img
-            src="/placeholder.jpg"
+            src="/images/placeholder.png"
             alt="レシピ画像"
             className="w-full h-48 object-cover rounded-md"
           />

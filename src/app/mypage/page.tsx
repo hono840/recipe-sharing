@@ -40,7 +40,7 @@ const MyPage = () => {
             {/* ユーザー情報 */}
             <div className="w-full  bg-gray-800 p-6 rounded-lg shadow-lg flex flex-col items-center">
               <img
-                src="/placeholder-avatar.jpg"
+                src="/images/placeholder-avatar.png"
                 alt="プロフィール画像"
                 className="w-24 h-24 rounded-full mb-4"
               />
@@ -71,7 +71,7 @@ const MyPage = () => {
                 {[...Array(3)].map((_, i) => (
                   <div key={i} className="bg-gray-700 p-4 rounded-lg shadow-lg">
                     <img
-                      src="/placeholder.jpg"
+                      src="/images/placeholder.png"
                       alt="レシピ画像"
                       className="w-full h-32 object-cover rounded-md"
                     />
@@ -100,7 +100,7 @@ const MyPage = () => {
                 {[...Array(3)].map((_, i) => (
                   <div key={i} className="bg-gray-700 p-4 rounded-lg shadow-lg">
                     <img
-                      src="/placeholder.jpg"
+                      src="/images/placeholder.png"
                       alt="レシピ画像"
                       className="w-full h-32 object-cover rounded-md"
                     />

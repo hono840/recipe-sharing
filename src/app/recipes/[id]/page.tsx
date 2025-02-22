@@ -14,14 +14,14 @@ const Recipes = () => {
           <h1 className="text-3xl font-bold text-yellow-400">レシピタイトル</h1>
           <div className="flex items-center mt-2">
             <img
-              src="/placeholder-avatar.jpg"
+              src="/images/placeholder-avatar.png"
               alt="投稿者アイコン"
               className="w-10 h-10 rounded-full mr-3"
             />
             <span className="text-gray-300">投稿者: ユーザー名</span>
           </div>
           <img
-            src="/placeholder.jpg"
+            src="/images/placeholder.png"
             alt="レシピ画像"
             className="w-full h-64 object-cover rounded-md mt-4"
           />
