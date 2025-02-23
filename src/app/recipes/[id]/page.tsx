@@ -20,14 +20,16 @@ const Recipes = () => {
             />
             <span className="text-gray-300">投稿者: ユーザー名</span>
           </div>
-          <img
-            src="/images/placeholder.png"
-            alt="レシピ画像"
-            className="w-full h-64 object-cover rounded-md mt-4"
-          />
-          <button className="p-2 bg-yellow-400 text-black font-semibold rounded-lg hover:bg-yellow-300">
-            ❤️ いいね
-          </button>
+          <div className="w-full flex flex-col gap-4">
+            <img
+              src="/images/placeholder.png"
+              alt="レシピ画像"
+              className="w-full h-64 object-cover rounded-md mt-4"
+            />
+            <button className="p-2 bg-yellow-400 text-black font-semibold rounded-lg hover:bg-yellow-300">
+              ❤️ いいね
+            </button>
+          </div>
         </div>
 
         {/* レシピ詳細 */}
