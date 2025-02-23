@@ -7,6 +7,13 @@ import Header from "../components/templates/Header";
 import { useUser } from "../hooks/useUser";
 import { supabase } from "../utils/supabaseClient";
 import { useRouter } from "next/navigation";
+import SectionWrapper from "../components/molecules/SectionWrapper";
+import SectionTitle from "../components/atoms/SectionTitle";
+import RecipeTitle from "../components/atoms/RecipeTitle";
+import SectiomContentsWrapper from "../components/molecules/SectiomContentsWrapper";
+import GridLayout from "../components/molecules/GridLayout";
+import PageTitle from "../components/atoms/PageTitle";
+import PrimaryLink from "../components/atoms/PrimaryLink";
 
 const MyPage = () => {
   const { user, isLoggedin } = useUser();
@@ -63,21 +70,17 @@ const MyPage = () => {
             </div>
 
             {/* 投稿したレシピ一覧 */}
-            <div className="w-full  bg-gray-800 p-6 rounded-lg shadow-lg">
-              <h2 className="text-2xl font-bold text-yellow-400">
-                投稿したレシピ
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
-                {[...Array(3)].map((_, i) => (
-                  <div key={i} className="bg-gray-700 p-4 rounded-lg shadow-lg">
+            <SectionWrapper>
+              <SectionTitle>投稿したレシピ</SectionTitle>
+              <GridLayout>
+                {[...Array(12)].map((_, i) => (
+                  <SectiomContentsWrapper key={i}>
                     <img
                       src="/images/placeholder.png"
                       alt="レシピ画像"
                       className="w-full h-32 object-cover rounded-md"
                     />
-                    <h3 className="text-lg font-semibold mt-2">
-                      レシピタイトル {i + 1}
-                    </h3>
+                    <RecipeTitle>レシピタイトル {i + 1}</RecipeTitle>
                     <div className="flex justify-between items-center mt-2">
                       <a
                         // href="/recipes/edit/[id]"
@@ -90,13 +93,13 @@ const MyPage = () => {
                         削除
                       </button>
                     </div>
-                  </div>
+                  </SectiomContentsWrapper>
                 ))}
-              </div>
-            </div>
+              </GridLayout>
+            </SectionWrapper>
 
             {/* いいねしたレシピ一覧 */}
-            <div className="w-full  bg-gray-800 p-6 rounded-lg shadow-lg">
+            {/* <div className="w-full  bg-gray-800 p-6 rounded-lg shadow-lg">
               <h2 className="text-2xl font-bold text-yellow-400">
                 いいねしたレシピ
               </h2>
@@ -115,27 +118,30 @@ const MyPage = () => {
                   </div>
                 ))}
               </div>
-            </div>
+            </div> */}
+            <SectionWrapper>
+              <SectionTitle>いいねしたレシピ</SectionTitle>
+              <GridLayout>
+                {[...Array(4)].map((_, i) => (
+                  <SectiomContentsWrapper key={i}>
+                    <img
+                      src="/images/placeholder.png"
+                      alt="レシピ画像"
+                      className="w-full h-32 object-cover rounded-md"
+                    />
+                    <RecipeTitle>レシピタイトル {i + 1}</RecipeTitle>
+                  </SectiomContentsWrapper>
+                ))}
+              </GridLayout>
+            </SectionWrapper>
           </>
         ) : (
           // 未ログインの場合
           <>
-            <div className="text-center text-lg font-semibold text-yellow-400">
-              ログインが必要です
-            </div>
+            <PageTitle>ログインが必要です</PageTitle>
             <div className="flex items-center justify-center gap-6">
-              <a
-                href="/login"
-                className="mt-4 p-2 bg-yellow-400 text-black font-semibold rounded-lg hover:bg-yellow-300"
-              >
-                ログイン
-              </a>
-              <a
-                href="/signup"
-                className="mt-4 p-2 bg-yellow-400 text-black font-semibold rounded-lg hover:bg-yellow-300"
-              >
-                サインアップ
-              </a>
+              <PrimaryLink href="/login">ログイン</PrimaryLink>
+              <PrimaryLink href="/signup">サインアップ</PrimaryLink>
             </div>
           </>
         )}
