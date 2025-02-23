@@ -49,7 +49,8 @@ const RecipesNew = () => {
 
             {/* 作り方リスト */}
             <div className="w-full">
-              <label className="block text-lg self-stretch">作り方</label>
+              <label className="block text-lg self-stretch">手順</label>
+
               <textarea
                 placeholder="作り方を入力（例：1. フライパンを熱する, 2. 卵を入れる）"
                 rows={5}

@@ -79,9 +79,13 @@ const MyPage = () => {
                       レシピタイトル {i + 1}
                     </h3>
                     <div className="flex justify-between items-center mt-2">
-                      <button className="text-yellow-400 hover:text-yellow-300">
+                      <a
+                        // href="/recipes/edit/[id]"
+                        href={`/recipes/edit/${i + 1}`}
+                        className="text-yellow-400 hover:text-yellow-300"
+                      >
                         編集
-                      </button>
+                      </a>
                       <button className="text-red-400 hover:text-red-300">
                         削除
                       </button>
