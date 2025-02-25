@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "../utils/supabaseClient";
 
 export const useUser = () => {
+  // ①ユーザー情報とログイン情報をstateで保持
   const [user, setUser] = useState<{
     id: string;
     email: string;
@@ -9,18 +10,23 @@ export const useUser = () => {
   } | null>(null);
   const [isLoggedin, setIsLoggedin] = useState<boolean | undefined>(undefined);
 
+  // ②ユーザー情報を初期マウント時に取得
   useEffect(() => {
+    // ②-1ユーザー情報をsupabaseから取得
     const fetchUser = async () => {
       const { data, error } = await supabase.auth.getUser();
       if (!error) {
+        // setUserにデータをセット
         setUser(
+          // ユーザー情報があればオブジェクトとしてセット
           data?.user
             ? {
                 id: data.user.id,
                 email: data.user.email ?? "",
                 username: data.user.user_metadata.username ?? "",
               }
-            : null
+            : // ユーザー情報がなければnullをセット
+              null
         );
         setIsLoggedin(true);
       } else {
@@ -39,7 +45,7 @@ export const useUser = () => {
               ? {
                   id: session.user.id,
                   email: session.user.email ?? "",
-                  username: session.user.user_metadata.userName ?? "",
+                  username: session.user.user_metadata.username ?? "",
                 }
               : null
           );
