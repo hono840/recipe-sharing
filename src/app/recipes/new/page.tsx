@@ -77,17 +77,14 @@ const RecipesEdit = () => {
       reader.onload = () => setImagePreview(reader.result as string);
       reader.readAsDataURL(file);
 
-      // 🔹 Supabase に画像をアップロード
       await uploadImageToSupabase(file);
     }
   };
 
   const uploadImageToSupabase = async (file: File) => {
     try {
-      // 🔹 一意なファイル名を作成（現在のタイムスタンプ + 元のファイル名）
       const filePath = `public/${Date.now()}-${file.name}`;
 
-      // 🔹 Supabase Storage に画像をアップロード
       const { error } = await supabase.storage
         .from("recipe-images")
         .upload(filePath, file);
@@ -97,14 +94,13 @@ const RecipesEdit = () => {
         return null;
       }
 
-      // 🔹 アップロード成功時、画像のURLを取得（修正）
       const { data: publicUrlData } = supabase.storage
         .from("recipe-images")
         .getPublicUrl(filePath);
 
-      const publicUrl = publicUrlData.publicUrl; // ✅ 修正
+      const publicUrl = publicUrlData.publicUrl;
 
-      setImageUrl(publicUrl); // 🔹 state に保存
+      setImageUrl(publicUrl);
       return publicUrl;
     } catch (error) {
       console.error("画像アップロード中にエラー:", error);
@@ -115,10 +111,6 @@ const RecipesEdit = () => {
   // レシピの投稿処理
   const postRecipe = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // if (!title || !ingredients || steps.length === 0) {
-    //   alert("レシピのタイトル、材料、手順は必須です！");
-    //   return;
-    // }
     if (!title || !description) {
       alert("レシピのタイトル、説明は必須です！");
       return;
@@ -196,17 +188,17 @@ const RecipesEdit = () => {
           </SectionWrapper>
 
           {/* 材料リスト */}
-          {/* <SectionWrapper>
+          <SectionWrapper>
             <SectionTitle>材料</SectionTitle>
             <TextArea
               placeholder={`・卵：2個\n・牛乳：100ml\n・砂糖：大さじ1`}
               value={ingredients}
               onChange={onChangeIngredients}
             />
-          </SectionWrapper> */}
+          </SectionWrapper>
 
           {/* 手順リスト */}
-          {/* <SectionWrapper>
+          <SectionWrapper>
             <ul className="flex flex-col gap-7">
               {steps.map((step, index) => (
                 <li key={index} className="flex items-start flex-col gap-2">
@@ -225,7 +217,7 @@ const RecipesEdit = () => {
             <PrimaryButton type="button" onClick={addStep}>
               手順を追加する
             </PrimaryButton>
-          </SectionWrapper> */}
+          </SectionWrapper>
 
           {/* 投稿ボタン */}
           <PrimaryButton type="submit">投稿する</PrimaryButton>
