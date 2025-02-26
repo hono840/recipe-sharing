@@ -4,15 +4,7 @@ import SmallText from "../atoms/SmallText";
 import LikesCount from "../atoms/LikesCount";
 import RecipeListCard from "./RecipeListCard";
 import { supabase } from "@/app/utils/supabaseClient";
-
-interface Recipe {
-  id: string;
-  created_at: string;
-  name: string;
-  description: string;
-  user_id: string;
-  image_url: string;
-}
+import { Recipe } from "@/app/types/Recipe";
 
 const RecipeLists = () => {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
@@ -33,19 +25,19 @@ const RecipeLists = () => {
   return (
     <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {/* サンプルデータ（動的に変更予定） */}
-      {recipes.map((reicpe) => (
-        <RecipeListCard key={reicpe.id}>
+      {recipes.map((recipe) => (
+        <RecipeListCard key={recipe.id}>
           <img
-            src="/images/placeholder.png"
+            src={recipe.image_url ?? "/images/placeholder.png"}
             alt="レシピ画像"
             className="w-full h-48 object-cover rounded-md"
           />
-          <RecipeTitle>{reicpe.name}</RecipeTitle>
+          <RecipeTitle>{recipe.name}</RecipeTitle>
           <SmallText>投稿者: 投稿者</SmallText>
           <div className="flex justify-between items-center mt-2">
             <LikesCount likesCount={10} />
             <a
-              href="/recipes/1"
+              href={`/recipes/${recipe.id}`}
               className="text-yellow-400 hover:text-yellow-300"
             >
               詳細を見る
