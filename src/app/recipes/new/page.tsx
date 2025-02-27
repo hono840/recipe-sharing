@@ -195,6 +195,9 @@ const RecipesEdit = () => {
               value={ingredients}
               onChange={onChangeIngredients}
             />
+            <PrimaryButton type="button" onClick={addStep}>
+              材料を追加する
+            </PrimaryButton>
           </SectionWrapper>
 
           {/* 手順リスト */}
