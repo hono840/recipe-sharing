@@ -11,6 +11,7 @@ import PageContentsWrapper from "@/app/components/molecules/PageContentsWrapper"
 import PageWrapper from "@/app/components/molecules/PageWrapper";
 import SectionWrapper from "@/app/components/molecules/SectionWrapper";
 import Header from "@/app/components/templates/Header";
+import { RECIPE_TEMPLATE } from "@/app/constants/recipeTemplate";
 import { useUser } from "@/app/hooks/useUser";
 import { supabase } from "@/app/utils/supabaseClient";
 import React, { useEffect, useState } from "react";
@@ -18,8 +19,6 @@ import React, { useEffect, useState } from "react";
 const RecipesEdit = () => {
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
-  const [steps, setSteps] = useState<string[]>([""]);
-  const [ingredients, setIngredients] = useState<string>("");
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [imageUrl, setImageUrl] = useState<string | null>(null);
@@ -32,30 +31,6 @@ const RecipesEdit = () => {
     }
   }, [user]);
 
-  // 手順の追加
-  const addStep = () => {
-    setSteps([...steps, ""]);
-  };
-
-  // 手順の変更
-  const updateStep = (index: number, value: string) => {
-    const newSteps = [...steps];
-    newSteps[index] = value;
-    setSteps(newSteps);
-  };
-
-  // 手順の削除
-  const removeStep = (index: number) => {
-    if (steps.length === 1) return; // 最低1つの手順は必要
-    const newSteps = steps.filter((_, i) => i !== index);
-    setSteps(newSteps);
-  };
-
-  // 材料入力
-  const onChangeIngredients = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setIngredients(e.target.value);
-  };
-
   // レシピタイトル
   const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
@@ -64,6 +39,12 @@ const RecipesEdit = () => {
   // レシピの説明
   const onChangeDescription = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setDescription(e.target.value);
+  };
+
+  // テンプレート本文を使用
+  const usedTemplate = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setDescription(RECIPE_TEMPLATE);
   };
 
   // 画像アップロード処理
@@ -132,8 +113,7 @@ const RecipesEdit = () => {
       }
       alert("レシピが投稿されました！");
       setTitle(""); // フォームをリセット
-      setIngredients("");
-      setSteps([""]);
+      setDescription("");
       setImagePreview(null);
       setSelectedFile(null);
       setImageUrl(null);
@@ -163,16 +143,6 @@ const RecipesEdit = () => {
             />
           </SectionWrapper>
 
-          {/* レシピの説明 */}
-          <SectionWrapper>
-            <SectionTitle>レシピの説明</SectionTitle>
-            <TextArea
-              value={description}
-              onChange={onChangeDescription}
-              placeholder="卵とケチャップライスで作るシンプルなオムライスです。"
-            />
-          </SectionWrapper>
-
           {/* レシピ画像アップロード */}
           <SectionWrapper>
             <SectionTitle>レシピ画像</SectionTitle>
@@ -187,39 +157,23 @@ const RecipesEdit = () => {
             )}
           </SectionWrapper>
 
-          {/* 材料リスト */}
+          {/* レシピの本文 */}
           <SectionWrapper>
-            <SectionTitle>材料</SectionTitle>
+            <div className="flex justify-between items-center">
+              <SectionTitle>レシピの本文</SectionTitle>
+              <button
+                onClick={usedTemplate}
+                className="px-4 py-2 text-sm text-gray-600 bg-gray-100 border border-gray-300 rounded hover:bg-gray-200"
+              >
+                テンプレート本文を使用
+              </button>
+            </div>
             <TextArea
-              placeholder={`・卵：2個\n・牛乳：100ml\n・砂糖：大さじ1`}
-              value={ingredients}
-              onChange={onChangeIngredients}
+              rows={20}
+              value={description}
+              onChange={onChangeDescription}
+              placeholder={RECIPE_TEMPLATE}
             />
-            <PrimaryButton type="button" onClick={addStep}>
-              材料を追加する
-            </PrimaryButton>
-          </SectionWrapper>
-
-          {/* 手順リスト */}
-          <SectionWrapper>
-            <ul className="flex flex-col gap-7">
-              {steps.map((step, index) => (
-                <li key={index} className="flex items-start flex-col gap-2">
-                  <SectionTitle>手順{index + 1}</SectionTitle>
-                  <TextArea
-                    placeholder={`手順 ${index + 1} を入力`}
-                    value={step}
-                    onChange={(e) => updateStep(index, e.target.value)}
-                  />
-                  {steps.length > 1 && (
-                    <DeleteButton onClick={() => removeStep(index)} />
-                  )}
-                </li>
-              ))}
-            </ul>
-            <PrimaryButton type="button" onClick={addStep}>
-              手順を追加する
-            </PrimaryButton>
           </SectionWrapper>
 
           {/* 投稿ボタン */}
