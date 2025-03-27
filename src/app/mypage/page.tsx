@@ -14,6 +14,8 @@ import SectiomContentsWrapper from "../components/molecules/SectiomContentsWrapp
 import GridLayout from "../components/molecules/GridLayout";
 import PageTitle from "../components/atoms/PageTitle";
 import PrimaryLink from "../components/atoms/PrimaryLink";
+import Image from "next/image";
+import Link from "next/link";
 
 const MyPage = () => {
   const { user, isLoggedin } = useUser();
@@ -46,9 +48,11 @@ const MyPage = () => {
           <>
             {/* ユーザー情報 */}
             <div className="w-full  bg-gray-800 p-6 rounded-lg shadow-lg flex flex-col items-center">
-              <img
+              <Image
                 src="/images/placeholder-avatar.png"
                 alt="プロフィール画像"
+                width={300}
+                height={300}
                 className="w-24 h-24 rounded-full mb-4"
               />
               {user?.username && (
@@ -75,20 +79,22 @@ const MyPage = () => {
               <GridLayout>
                 {[...Array(12)].map((_, i) => (
                   <SectiomContentsWrapper key={i}>
-                    <img
+                    <Image
                       src="/images/placeholder.png"
                       alt="レシピ画像"
+                      width={300}
+                      height={300}
                       className="w-full h-32 object-cover rounded-md"
                     />
                     <RecipeTitle>レシピタイトル {i + 1}</RecipeTitle>
                     <div className="flex justify-between items-center mt-2">
-                      <a
+                      <Link
                         // href="/recipes/edit/[id]"
                         href={`/recipes/edit/${i + 1}`}
                         className="text-yellow-400 hover:text-yellow-300"
                       >
                         編集
-                      </a>
+                      </Link>
                       <button className="text-red-400 hover:text-red-300">
                         削除
                       </button>
@@ -106,7 +112,7 @@ const MyPage = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
                 {[...Array(3)].map((_, i) => (
                   <div key={i} className="bg-gray-700 p-4 rounded-lg shadow-lg">
-                    <img
+                    <Image
                       src="/images/placeholder.png"
                       alt="レシピ画像"
                       className="w-full h-32 object-cover rounded-md"
@@ -124,9 +130,11 @@ const MyPage = () => {
               <GridLayout>
                 {[...Array(4)].map((_, i) => (
                   <SectiomContentsWrapper key={i}>
-                    <img
+                    <Image
                       src="/images/placeholder.png"
                       alt="レシピ画像"
+                      width={300}
+                      height={300}
                       className="w-full h-32 object-cover rounded-md"
                     />
                     <RecipeTitle>レシピタイトル {i + 1}</RecipeTitle>

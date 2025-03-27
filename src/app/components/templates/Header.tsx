@@ -1,5 +1,6 @@
 "use client";
 import { useUser } from "@/app/hooks/useUser";
+import Link from "next/link";
 import React from "react";
 
 const Header = () => {
@@ -10,34 +11,34 @@ const Header = () => {
       <nav className="hidden md:flex gap-6">
         <ul className="flex gap-6">
           <li>
-            <a href="/" className="hover:text-yellow-300">
+            <Link href="/" className="hover:text-yellow-300">
               レシピ一覧
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="/recipes/new" className="hover:text-yellow-300">
+            <Link href="/recipes/new" className="hover:text-yellow-300">
               レシピ投稿
-            </a>
+            </Link>
           </li>
           {!isLoggedin && (
             <li>
-              <a href="/login" className="hover:text-yellow-300">
+              <Link href="/login" className="hover:text-yellow-300">
                 ログイン
-              </a>
+              </Link>
             </li>
           )}
           {!isLoggedin && (
             <li>
-              <a href="/signup" className="hover:text-yellow-300">
+              <Link href="/signup" className="hover:text-yellow-300">
                 サインアップ
-              </a>
+              </Link>
             </li>
           )}
           {isLoggedin && (
             <li>
-              <a href="/mypage" className="hover:text-yellow-300">
+              <Link href="/mypage" className="hover:text-yellow-300">
                 マイページ
-              </a>
+              </Link>
             </li>
           )}
         </ul>

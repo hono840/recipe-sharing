@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/app/utils/supabaseClient";
+import Link from "next/link";
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
@@ -34,11 +35,8 @@ const Login = () => {
       setLoading(false);
       setSuccess(true);
       setFormData({ email: "", password: "" });
-
-      setTimeout(() => {
-        router.push("/mypage");
-        setSuccess(false), 3000;
-      });
+      router.push("/mypage");
+      setTimeout(() => setSuccess(false), 3000);
     }, 2000);
   };
 
@@ -100,9 +98,9 @@ const Login = () => {
         {/* 👇 アカウントを持っていない人向けの案内 */}
         <p className="mt-4 text-xs text-gray-400 text-center">
           アカウントをお持ちでない方は{" "}
-          <a href="/signup" className="text-blue-400 hover:underline">
+          <Link href="/signup" className="text-blue-400 hover:underline">
             こちらからサインアップ
-          </a>
+          </Link>
         </p>
       </div>
     </div>

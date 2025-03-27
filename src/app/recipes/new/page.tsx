@@ -1,6 +1,5 @@
 "use client";
 
-import DeleteButton from "@/app/components/atoms/DeleteButton";
 import Input from "@/app/components/atoms/Input";
 import InputFile from "@/app/components/atoms/InputFile";
 import PageTitle from "@/app/components/atoms/PageTitle";
@@ -14,13 +13,13 @@ import Header from "@/app/components/templates/Header";
 import { RECIPE_TEMPLATE } from "@/app/constants/recipeTemplate";
 import { useUser } from "@/app/hooks/useUser";
 import { supabase } from "@/app/utils/supabaseClient";
+import Image from "next/image";
 import React, { useEffect, useState } from "react";
 
 const RecipesEdit = () => {
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [imagePreview, setImagePreview] = useState<string | null>(null);
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [userId, setUserId] = useState<string | null>(null);
   const user = useUser();
@@ -51,7 +50,6 @@ const RecipesEdit = () => {
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
       const file = e.target.files[0];
-      setSelectedFile(file);
 
       // 画像プレビューを表示
       const reader = new FileReader();
@@ -115,7 +113,6 @@ const RecipesEdit = () => {
       setTitle(""); // フォームをリセット
       setDescription("");
       setImagePreview(null);
-      setSelectedFile(null);
       setImageUrl(null);
     } catch {
       console.error("レシピ投稿中にエラー:");
@@ -149,9 +146,11 @@ const RecipesEdit = () => {
             <InputFile onChange={handleFileChange} />
 
             {imagePreview && (
-              <img
+              <Image
                 src={imagePreview}
                 alt="選択した画像"
+                width={300}
+                height={300}
                 className="w-48 h-48 object-cover rounded-lg mt-4"
               />
             )}
