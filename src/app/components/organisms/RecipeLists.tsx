@@ -1,4 +1,4 @@
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import RecipeTitle from "../atoms/RecipeTitle";
 import SmallText from "../atoms/SmallText";
 import LikesCount from "../atoms/LikesCount";
