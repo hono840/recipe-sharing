@@ -9,12 +9,17 @@ import { supabase } from "../utils/supabaseClient";
 import { useRouter } from "next/navigation";
 import SectionWrapper from "../components/molecules/SectionWrapper";
 import SectionTitle from "../components/atoms/SectionTitle";
+import RecipeTitle from "../components/atoms/RecipeTitle";
+import SectiomContentsWrapper from "../components/molecules/SectiomContentsWrapper";
 import GridLayout from "../components/molecules/GridLayout";
 import PageTitle from "../components/atoms/PageTitle";
 import PrimaryLink from "../components/atoms/PrimaryLink";
 import Image from "next/image";
+import Link from "next/link";
+import { Recipe } from "../types/recipe";
 
 const MyPage = () => {
+  const [recipes, setRecipes] = useState<Recipe[]>([]);
   const { user, isLoggedin } = useUser();
   const router = useRouter();
 
@@ -73,13 +78,75 @@ const MyPage = () => {
             {/* 投稿したレシピ一覧 */}
             <SectionWrapper>
               <SectionTitle>投稿したレシピ</SectionTitle>
-              <GridLayout></GridLayout>
+              <GridLayout>
+                {recipes.map((recipe, i) => (
+                  <SectiomContentsWrapper key={i}>
+                    <Image
+                      src={recipe.image_url ?? "/images/placeholder.png"}
+                      alt="レシピ画像"
+                      width={300}
+                      height={300}
+                      className="w-full h-32 object-cover rounded-md"
+                    />
+                    <RecipeTitle>レシピタイトル {i + 1}</RecipeTitle>
+                    <div className="flex justify-between items-center mt-2">
+                      <Link
+                        // href="/recipes/edit/[id]"
+                        href={`/recipes/edit/${i + 1}`}
+                        className="text-yellow-400 hover:text-yellow-300"
+                      >
+                        編集
+                      </Link>
+                      <button className="text-red-400 hover:text-red-300">
+                        削除
+                      </button>
+                    </div>
+                  </SectiomContentsWrapper>
+                ))}
+                {/* {[...Array(1)].map((_, i) => (
+                  <SectiomContentsWrapper key={i}>
+                    <Image
+                      src="/images/placeholder.png"
+                      alt="レシピ画像"
+                      width={300}
+                      height={300}
+                      className="w-full h-32 object-cover rounded-md"
+                    />
+                    <RecipeTitle>レシピタイトル {i + 1}</RecipeTitle>
+                    <div className="flex justify-between items-center mt-2">
+                      <Link
+                        // href="/recipes/edit/[id]"
+                        href={`/recipes/edit/${i + 1}`}
+                        className="text-yellow-400 hover:text-yellow-300"
+                      >
+                        編集
+                      </Link>
+                      <button className="text-red-400 hover:text-red-300">
+                        削除
+                      </button>
+                    </div>
+                  </SectiomContentsWrapper>
+                ))} */}
+              </GridLayout>
             </SectionWrapper>
 
             {/* いいねしたレシピ一覧 */}
             <SectionWrapper>
               <SectionTitle>いいねしたレシピ</SectionTitle>
-              <GridLayout></GridLayout>
+              <GridLayout>
+                {/* {[...Array(1)].map((_, i) => (
+                  <SectiomContentsWrapper key={i}>
+                    <Image
+                      src="/images/placeholder.png"
+                      alt="レシピ画像"
+                      width={300}
+                      height={300}
+                      className="w-full h-32 object-cover rounded-md"
+                    />
+                    <RecipeTitle>レシピタイトル {i + 1}</RecipeTitle>
+                  </SectiomContentsWrapper>
+                ))} */}
+              </GridLayout>
             </SectionWrapper>
           </>
         ) : (
