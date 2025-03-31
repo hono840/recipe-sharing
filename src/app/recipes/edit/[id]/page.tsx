@@ -55,11 +55,7 @@ const RecipesEdit = () => {
         {/* 材料リスト */}
         <SectionWrapper>
           <SectionTitle>材料</SectionTitle>
-          <TextArea
-            placeholder={`・卵：2個\n・牛乳：100ml\n・砂糖：大さじ1`}
-            // value=""
-            // onChange={() => {}}
-          />
+          <TextArea placeholder={`・卵：2個\n・牛乳：100ml\n・砂糖：大さじ1`} />
         </SectionWrapper>
 
         {/* 手順リスト */}

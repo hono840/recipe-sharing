@@ -9,13 +9,10 @@ import { supabase } from "../utils/supabaseClient";
 import { useRouter } from "next/navigation";
 import SectionWrapper from "../components/molecules/SectionWrapper";
 import SectionTitle from "../components/atoms/SectionTitle";
-import RecipeTitle from "../components/atoms/RecipeTitle";
-import SectiomContentsWrapper from "../components/molecules/SectiomContentsWrapper";
 import GridLayout from "../components/molecules/GridLayout";
 import PageTitle from "../components/atoms/PageTitle";
 import PrimaryLink from "../components/atoms/PrimaryLink";
 import Image from "next/image";
-import Link from "next/link";
 
 const MyPage = () => {
   const { user, isLoggedin } = useUser();
