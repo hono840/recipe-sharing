@@ -76,71 +76,13 @@ const MyPage = () => {
             {/* 投稿したレシピ一覧 */}
             <SectionWrapper>
               <SectionTitle>投稿したレシピ</SectionTitle>
-              <GridLayout>
-                {[...Array(12)].map((_, i) => (
-                  <SectiomContentsWrapper key={i}>
-                    <Image
-                      src="/images/placeholder.png"
-                      alt="レシピ画像"
-                      width={300}
-                      height={300}
-                      className="w-full h-32 object-cover rounded-md"
-                    />
-                    <RecipeTitle>レシピタイトル {i + 1}</RecipeTitle>
-                    <div className="flex justify-between items-center mt-2">
-                      <Link
-                        // href="/recipes/edit/[id]"
-                        href={`/recipes/edit/${i + 1}`}
-                        className="text-yellow-400 hover:text-yellow-300"
-                      >
-                        編集
-                      </Link>
-                      <button className="text-red-400 hover:text-red-300">
-                        削除
-                      </button>
-                    </div>
-                  </SectiomContentsWrapper>
-                ))}
-              </GridLayout>
+              <GridLayout></GridLayout>
             </SectionWrapper>
 
             {/* いいねしたレシピ一覧 */}
-            {/* <div className="w-full  bg-gray-800 p-6 rounded-lg shadow-lg">
-              <h2 className="text-2xl font-bold text-yellow-400">
-                いいねしたレシピ
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
-                {[...Array(3)].map((_, i) => (
-                  <div key={i} className="bg-gray-700 p-4 rounded-lg shadow-lg">
-                    <Image
-                      src="/images/placeholder.png"
-                      alt="レシピ画像"
-                      className="w-full h-32 object-cover rounded-md"
-                    />
-                    <h3 className="text-lg font-semibold mt-2">
-                      レシピタイトル {i + 1}
-                    </h3>
-                    <span className="text-yellow-300">❤️ 10</span>
-                  </div>
-                ))}
-              </div>
-            </div> */}
             <SectionWrapper>
               <SectionTitle>いいねしたレシピ</SectionTitle>
-              <GridLayout>
-                {[...Array(4)].map((_, i) => (
-                  <SectiomContentsWrapper key={i}>
-                    <Image
-                      src="/images/placeholder.png"
-                      alt="レシピ画像"
-                      width={300}
-                      height={300}
-                      className="w-full h-32 object-cover rounded-md"
-                    />
-                    <RecipeTitle>レシピタイトル {i + 1}</RecipeTitle>
-                  </SectiomContentsWrapper>
-                ))}
-              </GridLayout>
+              <GridLayout></GridLayout>
             </SectionWrapper>
           </>
         ) : (
