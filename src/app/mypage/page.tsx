@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PageWrapper from "../components/molecules/PageWrapper";
 import PageContentsWrapper from "../components/molecules/PageContentsWrapper";
 import Header from "../components/templates/Header";
@@ -40,6 +40,26 @@ const MyPage = () => {
       }, 1000);
     }
   };
+
+  const getRicipes = async () => {
+    const { data, error } = await supabase
+      .from("recipes")
+      .select("*")
+      .eq("user_id", user?.id);
+    if (error) {
+      console.error(error);
+    }
+    if (data) {
+      setRecipes(data || []);
+    }
+  };
+
+  useEffect(() => {
+    if (user) {
+      getRicipes();
+    }
+  }, [user]);
+
   return (
     <PageWrapper>
       <PageContentsWrapper>
@@ -103,30 +123,6 @@ const MyPage = () => {
                     </div>
                   </SectiomContentsWrapper>
                 ))}
-                {/* {[...Array(1)].map((_, i) => (
-                  <SectiomContentsWrapper key={i}>
-                    <Image
-                      src="/images/placeholder.png"
-                      alt="レシピ画像"
-                      width={300}
-                      height={300}
-                      className="w-full h-32 object-cover rounded-md"
-                    />
-                    <RecipeTitle>レシピタイトル {i + 1}</RecipeTitle>
-                    <div className="flex justify-between items-center mt-2">
-                      <Link
-                        // href="/recipes/edit/[id]"
-                        href={`/recipes/edit/${i + 1}`}
-                        className="text-yellow-400 hover:text-yellow-300"
-                      >
-                        編集
-                      </Link>
-                      <button className="text-red-400 hover:text-red-300">
-                        削除
-                      </button>
-                    </div>
-                  </SectiomContentsWrapper>
-                ))} */}
               </GridLayout>
             </SectionWrapper>
 
